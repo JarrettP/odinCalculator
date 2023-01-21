@@ -1,0 +1,40 @@
+div {
+    color: white;
+    font-family: sans-serif;
+}
+
+#display {
+    width: 800px;
+    height: 200px;
+    background-color: black;
+    line-height: 200px;
+    font-size: 160px;
+    padding-left: 20px;
+}
+
+#calculator {
+    width: 800px;
+    height: 800px;
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 20px 0 0 20px;
+}
+
+.button, .number {
+    height: 180px;
+    width: 180px;
+    font-size: 60px;
+    text-align: center;
+    line-height: 180px;
+    border-radius: 100%;
+}
+
+.number {
+    background-color: darkgray;
+}
+
+.button {
+    background-color: orange;
+}
+
