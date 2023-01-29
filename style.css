@@ -1,6 +1,26 @@
-div {
+div, button {
     color: white;
     font-family: sans-serif;
+}
+
+button {
+    opacity: 0.9;
+    transition: 0.05s;
+    height: 180px;
+    width: 180px;
+    font-size: 60px;
+    text-align: center;
+    line-height: 180px;
+    border-style: none;
+    border-radius: 90px;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+button:active {
+    scale: 0.98;
 }
 
 #display {
@@ -9,7 +29,8 @@ div {
     background-color: black;
     line-height: 200px;
     font-size: 160px;
-    padding-left: 20px;
+    padding-right: 20px;
+    text-align: right;
 }
 
 #calculator {
@@ -21,20 +42,15 @@ div {
     padding: 20px 0 0 20px;
 }
 
-.button, .number {
-    height: 180px;
-    width: 180px;
-    font-size: 60px;
-    text-align: center;
-    line-height: 180px;
-    border-radius: 100%;
-}
-
 .number {
     background-color: darkgray;
 }
 
-.button {
+.action {
     background-color: orange;
 }
 
+/* #zero {
+    width: 360px;
+    border-radius: 90px;
+} */
