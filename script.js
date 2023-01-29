@@ -59,12 +59,10 @@ const updateDisplay = function() {
     document.getElementById('display').textContent = displayValue;
 };
 
-let displayValue = 0;
+let displayValue = 10;
 let expression = [];
 let output = 0;
 let input = [];
-
-
 
 // Function to lighten or darken CSS background colors for hover effects.
 // https://css-tricks.com/snippets/javascript/lighten-darken-color/
