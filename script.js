@@ -55,11 +55,37 @@ const operate = function(expression) {
     return output;
 };
 
+if (document.body.addEventListener){
+    document.body.addEventListener('click',buttonHandler,false);
+}
+else{
+    document.body.attachEvent('onclick',buttonHandler);//for IE
+}
+
+function buttonHandler(event){
+    event = event || window.event;
+    var target = event.target || event.srcElement;
+
+    let buttonSelection;
+    switch (target.className) {
+        case buttonSelection = 'number':
+            displayValue = displayValue + target.textContent;
+            updateDisplay();
+            break;
+        case buttonSelection = 'action1':
+
+            break;
+        case buttonSelection = 'action2':
+
+            break;
+    };
+};
+
 const updateDisplay = function() {
     document.getElementById('display').textContent = displayValue;
 };
 
-let displayValue = 10;
+let displayValue = '';
 let expression = [];
 let output = 0;
 let input = [];
