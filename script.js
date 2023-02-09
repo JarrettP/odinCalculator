@@ -69,6 +69,7 @@ function buttonHandler(event){
     let buttonSelection;
     switch (target.className) {
         case buttonSelection = 'number':
+            console.log(target);
             if (displayValue.length >= 9) {
                 break;
             }
@@ -84,7 +85,7 @@ function buttonHandler(event){
             updateDisplay();
             break;
         case buttonSelection = 'action1':
-
+            action1(target.id);
             break;
         case buttonSelection = 'action2':
             action2(target.id);
@@ -92,17 +93,40 @@ function buttonHandler(event){
     }
 }
 
+function action1(target) {
+    let buttonTarget;
+    switch (target) {
+        case buttonTarget = 'equals':
+            console.log(target);
+            break;
+        case buttonTarget = 'add':
+            console.log(target);
+            break;
+        case buttonTarget = 'subtract':
+            console.log(target);
+            break;
+        case buttonTarget = 'multiply':
+            console.log(target);
+            break;
+        case buttonTarget = 'divide':
+            console.log(target);
+            break;
+    }
+}
+
 function action2(target) {
     let buttonTarget;
-    console.log(target);
     switch (target) {
         case buttonTarget = 'clear':
+            console.log(target);
             displayValue = 0;
             updateDisplay();
             break;
         case buttonTarget = 'sign':
+            console.log(target);
             break;
         case buttonTarget = 'percent':
+            console.log(target);
             break;
     }
 }
