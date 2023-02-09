@@ -1,40 +1,40 @@
-const add = function(input) {
+function add(input) {
 	let sum = input[0];
     input = input.slice(1);
     input.forEach(element => {
         sum += element;    
     });
     return sum;
-};
+}
 
-const subtract = function(input) {
+function subtract(input) {
     let sum = input[0];
     input = input.slice(1);
     input.forEach(element => {
         sum -= element;    
     });
     return sum;
-};
+}
 
-const multiply = function(input) {
+function multiply(input) {
 	let sum = input[0];
     input = input.slice(1);
     input.forEach(element => {
         sum *= element;    
     });
     return sum;
-};
+}
 
-const divide = function(input) {
+function divide(input) {
     let sum = input[0];
     input = input.slice(1);
     input.forEach(element => {
         sum /= element;
     });
     return sum;
-};
+}
 
-const operate = function(expression) {
+function operate(expression) {
     input[0] = expression[0];
     input[1] = expression[2];
     
@@ -53,7 +53,7 @@ const operate = function(expression) {
             break;
     }
     return output;
-};
+}
 
 if (document.body.addEventListener){
     document.body.addEventListener('click',buttonHandler,false);
@@ -69,21 +69,27 @@ function buttonHandler(event){
     let buttonSelection;
     switch (target.className) {
         case buttonSelection = 'number':
-            displayValue = displayValue + target.textContent;
-            updateDisplay();
+            if (!(displayValue.length >= 9)) {
+                displayValue = displayValue + target.textContent;
+                updateDisplay();
+            }
             break;
         case buttonSelection = 'action1':
 
             break;
         case buttonSelection = 'action2':
-
+            action2(target.id);
             break;
-    };
-};
+    }
+}
 
-const updateDisplay = function() {
+function action2() {
+
+}
+
+function updateDisplay() {
     document.getElementById('display').textContent = displayValue;
-};
+}
 
 let displayValue = '';
 let expression = [];
