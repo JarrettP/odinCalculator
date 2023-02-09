@@ -69,10 +69,19 @@ function buttonHandler(event){
     let buttonSelection;
     switch (target.className) {
         case buttonSelection = 'number':
-            if (!(displayValue.length >= 9)) {
-                displayValue = displayValue + target.textContent;
-                updateDisplay();
+            if (displayValue.length >= 9) {
+                break;
             }
+            if (displayValue == '0' && target.id == 'zero') {
+                break;   
+            }
+            if (displayValue == '0' && !(target.id == 'zero')) {
+                displayValue = target.textContent;
+                updateDisplay();
+                break;
+            }
+            displayValue = displayValue + target.textContent;
+            updateDisplay();
             break;
         case buttonSelection = 'action1':
 
@@ -83,8 +92,22 @@ function buttonHandler(event){
     }
 }
 
-function action2() {
+function action2(target) {
+    let buttonTarget;
+    console.log(target);
+    switch (target) {
+        case buttonTarget = 'clear':
+            displayValue = 0;
+            updateDisplay();
+            break;
+        default:
+            break;
+    }
+}
 
+function updateClear() {
+    // Change 'AC' to 'C' after a number is input
+    // and follow iOS calculator clear behavior.
 }
 
 function updateDisplay() {
