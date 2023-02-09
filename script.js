@@ -100,7 +100,9 @@ function action2(target) {
             displayValue = 0;
             updateDisplay();
             break;
-        default:
+        case buttonTarget = 'sign':
+            break;
+        case buttonTarget = 'percent':
             break;
     }
 }
@@ -108,6 +110,7 @@ function action2(target) {
 function updateClear() {
     // Change 'AC' to 'C' after a number is input
     // and follow iOS calculator clear behavior.
+    return;
 }
 
 function updateDisplay() {
