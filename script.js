@@ -139,5 +139,3 @@ let displayValue = '';
 let expression = [];
 let output = 0;
 let input = [];
-
-// TEST
