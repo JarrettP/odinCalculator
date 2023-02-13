@@ -34,7 +34,7 @@ function divide(input) {
     return sum;
 }
 
-function operate(expression) {
+function calculate(expression) {
     input[0] = expression[0];
     input[1] = expression[2];
     
@@ -82,22 +82,22 @@ function buttonHandler(event){
                 updateClear();
                 break;
             }
-            displayValue = displayValue + target.textContent;
+            displayValue += target.textContent;
             updateDisplay();
             updateClear();
             break;
-        case buttonSelection = 'action1':
+        case buttonSelection = 'operation':
             // console.log(target.id);
-            action1(target.id);
+            operation(target.id);
             break;
-        case buttonSelection = 'action2':
+        case buttonSelection = 'modifier':
             // console.log(target.id);
-            action2(target.id);
+            modifier(target.id);
             break;
     }
 }
 
-function action1(target) {
+function operation(target) {
     let buttonTarget;
     switch (target) {
         case buttonTarget = 'equals':
@@ -113,7 +113,7 @@ function action1(target) {
     }
 }
 
-function action2(target) {
+function modifier(target) {
     let buttonTarget;
     switch (target) {
         case buttonTarget = 'clear':
@@ -122,8 +122,12 @@ function action2(target) {
             updateClear(1);
             break;
         case buttonTarget = 'sign':
+            displayValue *= -1
+            updateDisplay();
             break;
         case buttonTarget = 'percent':
+            displayValue /= 100;
+            updateDisplay();
             break;
     }
 }
