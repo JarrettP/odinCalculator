@@ -128,14 +128,15 @@ function action2(target) {
     }
 }
 
-function updateClear(click) {
+function updateClear(clicked) {
     clearButton = document.getElementById('clear');
-    if (click === 1) {
+    if (clicked === 1) {
         clearButton.textContent = "AC";
         return;
     }
     if (displayValue != 0) {
         clearButton.textContent = "C";
+        return;
     }
 }
 
