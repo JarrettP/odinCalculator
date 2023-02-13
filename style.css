@@ -48,11 +48,11 @@ button:active {
     background-color: #464646;
 }
 
-.action1 {
+.operation {
     background-color: #ffae00;
 }
 
-.action2 {
+.modifier {
     background-color: #a3a3a3;
     color: #000000;
 }
