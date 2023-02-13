@@ -69,7 +69,7 @@ function buttonHandler(event){
     let buttonSelection;
     switch (target.className) {
         case buttonSelection = 'number':
-            console.log(target.id);
+            // console.log(target.id);
             if (displayValue.length >= 9) {
                 break;
             }
@@ -79,17 +79,19 @@ function buttonHandler(event){
             if (displayValue == '0' && !(target.id == 'zero')) {
                 displayValue = target.textContent;
                 updateDisplay();
+                updateClear();
                 break;
             }
             displayValue = displayValue + target.textContent;
             updateDisplay();
+            updateClear();
             break;
         case buttonSelection = 'action1':
-            console.log(target.id);
+            // console.log(target.id);
             action1(target.id);
             break;
         case buttonSelection = 'action2':
-            console.log(target.id);
+            // console.log(target.id);
             action2(target.id);
             break;
     }
@@ -117,6 +119,7 @@ function action2(target) {
         case buttonTarget = 'clear':
             displayValue = 0;
             updateDisplay();
+            updateClear(1);
             break;
         case buttonTarget = 'sign':
             break;
@@ -125,10 +128,15 @@ function action2(target) {
     }
 }
 
-function updateClear() {
-    // Change 'AC' to 'C' after a number is input
-    // and follow iOS calculator clear behavior.
-    return;
+function updateClear(click) {
+    clearButton = document.getElementById('clear');
+    if (click === 1) {
+        clearButton.textContent = "AC";
+        return;
+    }
+    if (displayValue != 0) {
+        clearButton.textContent = "C";
+    }
 }
 
 function updateDisplay() {
