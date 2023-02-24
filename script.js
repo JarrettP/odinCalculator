@@ -39,28 +39,24 @@ function calculate(expression) {
     input[1] = expression[2];
     
     switch (true) {
-        case expression[1] == "+":
+        case expression[1] === "+":
             output = add(input);
             break;
-        case expression[1] == "-":
+        case expression[1] === "-":
             output = subtract(input);
             break;
-        case expression[1] == "*":
+        case expression[1] === "*":
             output = multiply(input);
             break;
-        case expression[1] == "/":
+        case expression[1] === "/":
             output = divide(input);
             break;
     }
     return output;
 }
 
-if (document.body.addEventListener){
-    document.body.addEventListener('click',buttonHandler,false);
-}
-else{
-    document.body.attachEvent('onclick',buttonHandler);//for IE
-}
+
+document.body.addEventListener('click',buttonHandler,false);
 
 function buttonHandler(event){
     event = event || window.event;
@@ -69,14 +65,22 @@ function buttonHandler(event){
     let buttonSelection;
     switch (target.className) {
         case buttonSelection = 'number':
-            // console.log(target.id);
             if (displayValue.length >= 9) {
                 break;
             }
-            if (displayValue == '0' && target.id == 'zero') {
+            if (displayValue === '0' && target.id === 'zero') {
                 break;   
             }
-            if (displayValue == '0' && !(target.id == 'zero')) {
+            if (displayValue.includes('.') && target.id === 'point') {
+                break;
+            }
+            if (displayValue === '0' && target.id === 'point') {
+                displayValue = '0.'
+                updateDisplay();
+                updateClear();
+                break;
+            }
+            if (displayValue === '0' && !(target.id === 'zero')) {
                 displayValue = target.textContent;
                 updateDisplay();
                 updateClear();
@@ -87,11 +91,9 @@ function buttonHandler(event){
             updateClear();
             break;
         case buttonSelection = 'operation':
-            // console.log(target.id);
             operation(target.id);
             break;
         case buttonSelection = 'modifier':
-            // console.log(target.id);
             modifier(target.id);
             break;
     }
@@ -117,7 +119,7 @@ function modifier(target) {
     let buttonTarget;
     switch (target) {
         case buttonTarget = 'clear':
-            displayValue = 0;
+            displayValue = '0';
             updateDisplay();
             updateClear(1);
             break;
@@ -148,7 +150,7 @@ function updateDisplay() {
     document.getElementById('display').textContent = displayValue;
 }
 
-let displayValue = '';
+let displayValue = '0';
 let expression = [];
 let output = 0;
 let input = [];
