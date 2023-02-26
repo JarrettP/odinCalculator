@@ -39,16 +39,16 @@ function calculate(expression) {
     input[1] = expression[2];
     
     switch (true) {
-        case expression[1] === "+":
+        case expression[1] === '+':
             output = add(input);
             break;
-        case expression[1] === "-":
+        case expression[1] === '-':
             output = subtract(input);
             break;
-        case expression[1] === "*":
+        case expression[1] === '*':
             output = multiply(input);
             break;
-        case expression[1] === "/":
+        case expression[1] === '/':
             output = divide(input);
             break;
     }
@@ -137,11 +137,11 @@ function modifier(target) {
 function updateClear(clicked) {
     clearButton = document.getElementById('clear');
     if (clicked === 1) {
-        clearButton.textContent = "AC";
+        clearButton.textContent = 'AC';
         return;
     }
-    if (displayValue != 0) {
-        clearButton.textContent = "C";
+    if (displayValue !== '0') {
+        clearButton.textContent = 'C';
         return;
     }
 }
@@ -152,5 +152,5 @@ function updateDisplay() {
 
 let displayValue = '0';
 let expression = [];
-let output = 0;
+let output = '0';
 let input = [];
