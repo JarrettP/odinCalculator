@@ -35,20 +35,20 @@ function divide(input) {
 }
 
 function calculate(expression) {
-    input[0] = expression[0];
-    input[1] = expression[2];
+    input[0] = expression[0] * 1;
+    input[1] = expression[2] * 1;
     
     switch (true) {
-        case expression[1] === '+':
+        case expression[1] === 'add':
             output = add(input);
             break;
-        case expression[1] === '-':
+        case expression[1] === 'subtract':
             output = subtract(input);
             break;
-        case expression[1] === '*':
+        case expression[1] === 'multiply':
             output = multiply(input);
             break;
-        case expression[1] === '/':
+        case expression[1] === 'divide':
             output = divide(input);
             break;
     }
@@ -101,36 +101,17 @@ function buttonHandler(event){
 
 function operation(target) {
 
-    let buttonTarget;
     button = document.getElementById(target);
     button.classList.add('active')
 
-    switch (target) {
-        case buttonTarget = 'equals':
-            calculate(input);
-            // displayValue = '0';
-            break;
-        case buttonTarget = 'add':
-            expression.push(displayValue);
-            expression.push('+');
-            displayValue = '0';
-            break;
-        case buttonTarget = 'subtract':
-            expression.push(displayValue);
-            expression.push('-');
-            displayValue = '0';
-            break;
-        case buttonTarget = 'multiply':
-            expression.push(displayValue);
-            expression.push('*');
-            displayValue = '0';
-            break;
-        case buttonTarget = 'divide':
-            expression.push(displayValue);
-            expression.push('/');
-            displayValue = '0';
-            break;
+    if (target === 'equals') {
+        calculate(input);
+        // displayValue = '0';
     }
+
+    expression.push(displayValue);
+    expression.push(target);
+    displayValue = '0';
 }
 
 function modifier(target) {
