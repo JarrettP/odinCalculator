@@ -101,6 +101,12 @@ function buttonHandler(event){
 
 function operation(target) {
 
+    const activeButton = document.querySelector('.active');
+    if (activeButton != null) {
+        activeButton.classList.remove('active')
+    }
+    
+
     button = document.getElementById(target);
     button.classList.add('active')
 
@@ -108,7 +114,6 @@ function operation(target) {
         calculate(input);
         // displayValue = '0';
     }
-
     expression.push(displayValue);
     expression.push(target);
     displayValue = '0';
