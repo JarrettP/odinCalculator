@@ -100,17 +100,35 @@ function buttonHandler(event){
 }
 
 function operation(target) {
+
     let buttonTarget;
+    button = document.getElementById(target);
+    button.classList.add('active')
+
     switch (target) {
         case buttonTarget = 'equals':
+            calculate(input);
+            // displayValue = '0';
             break;
         case buttonTarget = 'add':
+            expression.push(displayValue);
+            expression.push('+');
+            displayValue = '0';
             break;
         case buttonTarget = 'subtract':
+            expression.push(displayValue);
+            expression.push('-');
+            displayValue = '0';
             break;
         case buttonTarget = 'multiply':
+            expression.push(displayValue);
+            expression.push('*');
+            displayValue = '0';
             break;
         case buttonTarget = 'divide':
+            expression.push(displayValue);
+            expression.push('/');
+            displayValue = '0';
             break;
     }
 }
