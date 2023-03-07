@@ -34,7 +34,7 @@ function divide(input) {
     return sum;
 }
 
-function calculate(expression) {
+function operate(expression) {
     input[0] = expression[0] * 1;
     input[1] = expression[2] * 1;
     
@@ -52,7 +52,9 @@ function calculate(expression) {
             output = divide(input);
             break;
     }
-    return output;
+
+    displayValue = output;
+    updateDisplay();
 }
 
 
@@ -62,6 +64,8 @@ function buttonHandler(event){
     event = event || window.event;
     var target = event.target || event.srcElement;
 
+    lastPressed = null;
+
     let buttonSelection;
     switch (target.className) {
         case buttonSelection = 'number':
@@ -70,6 +74,9 @@ function buttonHandler(event){
             }
             if (displayValue === '0' && target.id === 'zero') {
                 break;   
+            }
+            if (lastPressed = 'equals') {
+                displayValue = '0';
             }
             if (displayValue.includes('.') && target.id === 'point') {
                 break;
@@ -100,32 +107,43 @@ function buttonHandler(event){
 }
 
 function operation(target) {
+    lastPressed = null;
 
     const activeButton = document.querySelector('.active');
     if (activeButton != null) {
         activeButton.classList.remove('active')
     }
     
-
     button = document.getElementById(target);
-    button.classList.add('active')
-
-    if (target === 'equals') {
-        calculate(input);
-        // displayValue = '0';
+    if (target != 'equals') {
+        button.classList.add('active')
     }
-    expression.push(displayValue);
-    expression.push(target);
-    displayValue = '0';
+    
+    if (target === 'equals') {
+        expression.push(displayValue);
+        operate(expression);
+        expression = [];
+        expression.push(displayValue);
+        operated = 1;
+        lastPressed = 'equals';
+    } else {
+        if (lastPressed = null) {
+            expression.push(displayValue);
+            displayValue = '0';
+        }
+        expression.push(target);
+    }
 }
 
 function modifier(target) {
+    lastPressed = null;
     let buttonTarget;
     switch (target) {
         case buttonTarget = 'clear':
             displayValue = '0';
             updateDisplay();
             updateClear(1);
+            expression = []
             break;
         case buttonTarget = 'sign':
             displayValue *= -1
@@ -158,3 +176,5 @@ let displayValue = '0';
 let expression = [];
 let output = '0';
 let input = [];
+let operated = 0;
+let lastPressed = null;
