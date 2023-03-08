@@ -1,5 +1,5 @@
 function add(input) {
-	let sum = input[0];
+	sum = input[0];
     input = input.slice(1);
     input.forEach(element => {
         sum += element;    
@@ -8,7 +8,7 @@ function add(input) {
 }
 
 function subtract(input) {
-    let sum = input[0];
+    sum = input[0];
     input = input.slice(1);
     input.forEach(element => {
         sum -= element;    
@@ -17,7 +17,7 @@ function subtract(input) {
 }
 
 function multiply(input) {
-	let sum = input[0];
+	sum = input[0];
     input = input.slice(1);
     input.forEach(element => {
         sum *= element;    
@@ -26,7 +26,7 @@ function multiply(input) {
 }
 
 function divide(input) {
-    let sum = input[0];
+    sum = input[0];
     input = input.slice(1);
     input.forEach(element => {
         sum /= element;
@@ -34,7 +34,13 @@ function divide(input) {
     return sum;
 }
 
-function round(input, decimals) {
+function round(input) {
+    floatingNumber = input + '';
+    splitNumber = floatingNumber.substring(0,12).split('.');
+    
+    integer = splitNumber[0].length;
+    decimals = 9 - integer;
+
     sum = Number(Math.round(input+'e'+decimals)+'e-'+decimals);
     return sum;
 }
@@ -57,8 +63,8 @@ function operate(expression) {
             output = divide(input);
             break;
     }
-
-    displayValue = round(output,9);
+    roundedOutput = round(output);
+    displayValue = roundedOutput;
     updateDisplay();
 }
 
@@ -68,21 +74,20 @@ function buttonHandler(event){
     event = event || window.event;
     var target = event.target || event.srcElement;
 
-    lastPressed = target.id;
-
     let buttonSelection;
     switch (target.className) {
         case buttonSelection = 'number':
+            if (lastPressed == 'equals') {
+                expression = [];
+                displayValue = '0';
+                console.log(displayValue);
+            }
             if (displayValue.length >= 9) {
                 break;
             }
             if (displayValue === '0' && target.id === 'zero') {
                 break;   
             }
-            // if (lastPressed = 'equals') {
-            //     displayValue = '0';
-            //     lastPressed = null;
-            // }
             if (displayValue.includes('.') && target.id === 'point') {
                 break;
             }
@@ -103,12 +108,19 @@ function buttonHandler(event){
             updateClear();
             break;
         case buttonSelection = 'operation':
+            if (lastPressed == 'equals') {
+                displayValue = document.getElementById('display').textContent;
+                console.log(displayValue);
+                expression = [];
+                // expression.push(displayValue);
+            }
             operation(target.id);
             break;
         case buttonSelection = 'modifier':
             modifier(target.id);
             break;
     }
+    lastPressed = target.id;
 }
 
 function operation(input) {
@@ -121,12 +133,10 @@ function operation(input) {
     if (input !== 'equals') {
         button.classList.add('active')
     }
-
+    
     if (input == 'equals') {
         expression.push(displayValue);
         operate(expression);
-        expression = [];
-        expression.push(displayValue);
     } else {
         expression.push(displayValue);
         displayValue = '0';
