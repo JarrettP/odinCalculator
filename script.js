@@ -35,7 +35,7 @@ function divide(input) {
 }
 
 function round(input) {
-    floatingNumber = input + '';
+    floatingNumber = input.toString();
     splitNumber = floatingNumber.substring(0,12).split('.');
     
     integer = splitNumber[0].length;
@@ -64,7 +64,7 @@ function operate(expression) {
             break;
     }
     roundedOutput = round(output);
-    displayValue = roundedOutput;
+    displayValue = roundedOutput.toString();
     updateDisplay();
 }
 
@@ -73,14 +73,13 @@ document.body.addEventListener('click',buttonHandler,false);
 function buttonHandler(event){
     event = event || window.event;
     var target = event.target || event.srcElement;
-
+    
     let buttonSelection;
     switch (target.className) {
         case buttonSelection = 'number':
             if (lastPressed == 'equals') {
                 expression = [];
                 displayValue = '0';
-                console.log(displayValue);
             }
             if (displayValue.length >= 9) {
                 break;
@@ -108,13 +107,22 @@ function buttonHandler(event){
             updateClear();
             break;
         case buttonSelection = 'operation':
+            currentOperation = target.id
             if (lastPressed == 'equals') {
+                lastExpression = expression;
                 displayValue = document.getElementById('display').textContent;
-                console.log(displayValue);
                 expression = [];
-                // expression.push(displayValue);
             }
-            operation(target.id);
+            if (lastPressed == 'equals' && target.id == 'equals') {
+                expression = lastExpression
+                expression[0] = displayValue
+                operate(expression);
+                break;
+            }
+            operation(currentOperation);
+            break;
+        case buttonSelection = 'operation active':
+            followUpOperation(target.id);
             break;
         case buttonSelection = 'modifier':
             modifier(target.id);
@@ -124,11 +132,10 @@ function buttonHandler(event){
 }
 
 function operation(input) {
-    const activeButton = document.querySelector('.active');
+    let activeButton = document.querySelector('.active');
     if (activeButton != null) {
         activeButton.classList.remove('active')
     }
-    
     button = document.getElementById(input);
     if (input !== 'equals') {
         button.classList.add('active')
@@ -144,10 +151,27 @@ function operation(input) {
     }
 }
 
+function followUpOperation(input) {
+    let activeButton = document.querySelector('.active');
+    if (activeButton = null) {
+        activeButton.classList.remove('active')
+    }
+    expression.push(displayValue);
+    operate(expression);
+    expression = [];
+    expression.push(displayValue);
+    displayValue = '0';
+    expression.push(input);
+}
+
 function modifier(input) {
     let buttonTarget;
     switch (input) {
         case buttonTarget = 'clear':
+            let activeButton = document.querySelector('.active');
+            if (activeButton != null) {
+                activeButton.classList.remove('active')
+            }
             displayValue = '0';
             updateDisplay();
             updateClear(1);
@@ -159,6 +183,7 @@ function modifier(input) {
             break;
         case buttonTarget = 'percent':
             displayValue /= 100;
+            displayValue = round(displayValue);
             updateDisplay();
             break;
     }
@@ -182,6 +207,7 @@ function updateDisplay() {
 
 let displayValue = '0';
 let expression = [];
+let lastExpression = [];
 let output = '0';
 let input = [];
 let lastPressed = null;
