@@ -66,5 +66,7 @@ button:active {
 }
 
 .active {
+    background-color: white;
+    color: #ffb81e;
     opacity: 1;
 }
