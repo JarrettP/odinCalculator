@@ -34,6 +34,11 @@ function divide(input) {
     return sum;
 }
 
+function round(input, decimals) {
+    sum = Number(Math.round(input+'e'+decimals)+'e-'+decimals);
+    return sum;
+}
+
 function operate(expression) {
     input[0] = expression[0] * 1;
     input[1] = expression[2] * 1;
@@ -53,10 +58,9 @@ function operate(expression) {
             break;
     }
 
-    displayValue = output;
+    displayValue = round(output,9);
     updateDisplay();
 }
-
 
 document.body.addEventListener('click',buttonHandler,false);
 
@@ -64,7 +68,7 @@ function buttonHandler(event){
     event = event || window.event;
     var target = event.target || event.srcElement;
 
-    lastPressed = null;
+    lastPressed = target.id;
 
     let buttonSelection;
     switch (target.className) {
@@ -75,9 +79,10 @@ function buttonHandler(event){
             if (displayValue === '0' && target.id === 'zero') {
                 break;   
             }
-            if (lastPressed = 'equals') {
-                displayValue = '0';
-            }
+            // if (lastPressed = 'equals') {
+            //     displayValue = '0';
+            //     lastPressed = null;
+            // }
             if (displayValue.includes('.') && target.id === 'point') {
                 break;
             }
@@ -106,47 +111,40 @@ function buttonHandler(event){
     }
 }
 
-function operation(target) {
-    lastPressed = null;
-
+function operation(input) {
     const activeButton = document.querySelector('.active');
     if (activeButton != null) {
         activeButton.classList.remove('active')
     }
     
-    button = document.getElementById(target);
-    if (target != 'equals') {
+    button = document.getElementById(input);
+    if (input !== 'equals') {
         button.classList.add('active')
     }
-    
-    if (target === 'equals') {
+
+    if (input == 'equals') {
         expression.push(displayValue);
         operate(expression);
         expression = [];
         expression.push(displayValue);
-        operated = 1;
-        lastPressed = 'equals';
     } else {
-        if (lastPressed = null) {
-            expression.push(displayValue);
-            displayValue = '0';
-        }
-        expression.push(target);
+        expression.push(displayValue);
+        displayValue = '0';
+        expression.push(input);
     }
 }
 
-function modifier(target) {
-    lastPressed = null;
+function modifier(input) {
     let buttonTarget;
-    switch (target) {
+    switch (input) {
         case buttonTarget = 'clear':
             displayValue = '0';
             updateDisplay();
             updateClear(1);
-            expression = []
+            expression = [];
             break;
         case buttonTarget = 'sign':
-            displayValue *= -1
+            displayValue *= -1;
             updateDisplay();
             break;
         case buttonTarget = 'percent':
@@ -176,5 +174,4 @@ let displayValue = '0';
 let expression = [];
 let output = '0';
 let input = [];
-let operated = 0;
 let lastPressed = null;
